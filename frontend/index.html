@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Clubs Profile Manager</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f4f7f6; }
+        h1, h2 { color: #333; }
+        form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 30px; max-width: 500px; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .input-group input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background-color: #0056b3; }
+        button.cancel-btn { background-color: #6c757d; margin-left: 10px; }
+        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #007bff; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        .action-btns button { padding: 5px 10px; margin-right: 5px; font-size: 12px; }
+        .edit-btn { background-color: #ffc107; color: black; }
+        .delete-btn { background-color: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>🏫 Mulungushi University Club Manager</h1>
+    
+    <h2 id="form-title">Add New Campus Club</h2>
+    <form id="club-form">
+        <input type="hidden" id="club-id">
+        <div class="input-group"><label>Club Name</label><input type="text" id="name" required></div>
+        <div class="input-group"><label>Category</label><input type="text" id="category" required></div>
+        <div class="input-group"><label>President / Leader</label><input type="text" id="president" required></div>
+        <div class="input-group"><label>Member Count</label><input type="number" id="member_count" value="0"></div>
+        <div class="input-group"><label>Meeting Day</label><input type="text" id="meeting_day"></div>
+        <div class="input-group"><label>Allocated Budget (ZK)</label><input type="number" step="0.01" id="budget" value="0.00"></div>
+        <button type="submit" id="submit-btn">Save Club</button>
+        <button type="button" id="cancel-btn" class="cancel-btn" style="display: none;">Cancel</button>
+    </form>
+
+    <h2>Registered Campus Clubs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th><th>Name</th><th>Category</th><th>President</th><th>Members</th><th>Meeting Day</th><th>Budget (ZK)</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="clubs-table-body"></tbody>
+    </table>
+
+    <script src="app.js"></script>
+</body>
+</html>
