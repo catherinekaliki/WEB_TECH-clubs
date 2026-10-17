@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api/clubs';
+const API_URL = 'https://node-mysql-crud-9vqa.onrender.com/api/clubs';
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchClubs();
