@@ -1,16 +1,13 @@
-CREATE DATABASE IF NOT EXISTS campus_crud;
-USE campus_crud;
-
 CREATE TABLE IF NOT EXISTS clubs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(120) NOT NULL,
-    category VARCHAR(50) NOT NULL,
-    president VARCHAR(100) NOT NULL,
-    member_count INT DEFAULT 0,
-    meeting_day VARCHAR(20),
-    budget DECIMAL(10,2) DEFAULT 0.00,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    category TEXT NOT NULL,
+    president TEXT NOT NULL,
+    member_count INTEGER DEFAULT 0,
+    meeting_day TEXT,
+    budget REAL DEFAULT 0.00,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO clubs (name, category, president, member_count, meeting_day, budget) VALUES

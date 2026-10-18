@@ -1,35 +1,67 @@
-const API_URL = 'https://node-mysql-crud-9vqa.onrender.com/api/clubs';
+const API_URL = 'http://localhost:3000/api/clubs';
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchClubs();
     document.getElementById('club-form').addEventListener('submit', handleFormSubmit);
     document.getElementById('cancel-btn').addEventListener('click', clearForm);
 });
-
 async function fetchClubs() {
     try {
         const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch clubs');
+        }
+
         const clubs = await response.json();
         const tableBody = document.getElementById('clubs-table-body');
+
         tableBody.innerHTML = '';
 
         clubs.forEach(club => {
             const row = document.createElement('tr');
+
             row.innerHTML = `
                 <td>${club.id}</td>
-                <td><strong>${club.name}</strong></td>
-                <td>${club.category}</td>
-                <td>${club.president}</td>
+                <td><strong></strong></td>
+                <td></td>
+                <td></td>
                 <td>${club.member_count}</td>
-                <td>${club.meeting_day || 'N/A'}</td>
-                <td>K${parseFloat(club.budget).toFixed(2)}</td>
+                <td></td>
+                <td>K${Number(club.budget || 0).toFixed(2)}</td>
                 <td class="action-btns">
-                    <button class="edit-btn" onclick="editClub(${club.id}, '${escape(club.name)}', '${escape(club.category)}', '${escape(club.president)}', ${club.member_count}, '${escape(club.meeting_day)}', ${club.budget})">Edit</button>
-                    <button class="delete-btn" onclick="deleteClub(${club.id})">Delete</button>
+                    <button type="button" class="edit-btn">Edit</button>
+                    <button type="button" class="delete-btn">Delete</button>
                 </td>
             `;
+
+            // Display club details safely
+            row.cells[1].querySelector('strong').textContent = club.name;
+            row.cells[2].textContent = club.category;
+            row.cells[3].textContent = club.president;
+            row.cells[5].textContent = club.meeting_day || 'N/A';
+
+            // Make Edit button work
+            row.querySelector('.edit-btn').addEventListener('click', () => {
+                editClub(
+                    club.id,
+                    club.name,
+                    club.category,
+                    club.president,
+                    club.member_count,
+                    club.meeting_day || '',
+                    club.budget
+                );
+            });
+
+            // Keep Delete working
+            row.querySelector('.delete-btn').addEventListener('click', () => {
+                deleteClub(club.id);
+            });
+
             tableBody.appendChild(row);
         });
+
     } catch (error) {
         console.error('Error fetching clubs:', error);
     }
@@ -77,6 +109,7 @@ function editClub(id, name, category, president, member_count, meeting_day, budg
     document.getElementById('meeting_day').value = unescape(meeting_day);
     document.getElementById('budget').value = budget;
     document.getElementById('form-title').innerText = 'Edit Campus Club Profile';
+    document.querySelector('#club-form button:not(#cancel-btn').textContent='Update Club';
     document.getElementById('cancel-btn').style.display = 'inline-block';
 }
 
@@ -95,5 +128,6 @@ function clearForm() {
     document.getElementById('club-form').reset();
     document.getElementById('club-id').value = '';
     document.getElementById('form-title').innerText = 'Add New Campus Club';
+    document.querySelector('#club-form button:not(#cancel-btn').textContent='Save Club';
     document.getElementById('cancel-btn').style.display = 'none';
 }
