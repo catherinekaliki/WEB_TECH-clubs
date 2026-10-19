@@ -1,4 +1,4 @@
-const API_URL = 'https://web-tech-clubs.onrender.com';
+const API_URL = 'https://web-tech-clubs.onrender.com/api/clubs';
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchClubs();
